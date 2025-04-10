@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Création de Club</title>
+    <link rel="stylesheet" href="/css/Creation.css">
+</head>
+<body>
+<h1>Créer un nouveau club</h1>
+<form th:action="@{/Creation}" th:object="${club}" method="post" enctype="multipart/form-data">
+    <div class="nav-buttons">
+        <button type="button" class="nav-button active" onclick="showSection('informations', event)">INFORMATIONS</button>
+        <button type="button" class="nav-button" onclick="showSection('members', event)">MEMBRES</button>
+        <button type="button" class="nav-button" onclick="showSection('validation', event)">VALIDATION</button>
+    </div>
+
+
+    <div id="informations" class="section active">
+        <div class="form-group">
+            <label>Nom du club</label>
+            <input type="text" th:field="*{name}" id="clubName">
+        </div>
+        <div class="form-group">
+            <label>Description</label>
+            <textarea id="clubDescription" th:field="*{description}" rows="4"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Domaine d'activité</label>
+            <input type="text" th:field="*{domain}" id="clubDomain">
+        </div>
+        <div>
+            <label>Logo</label>
+            <input type="file" name="logoFile">
+        </div>
+    </div>
+
+    <!-- Section Membres -->
+    <div id="members" class="section">
+        <button type="button" class="add-member-btn" onclick="addMemberField()">+ Ajouter un membre</button>
+        <div class="members-list" id="membersList"></div>
+    </div>
+
+    <!-- Section Validation -->
+    <div id="validation" class="section">
+        <h2>Récapitulatif</h2>
+        <div id="summaryContent"></div>
+        <button  type="button" onclick="submitClub()" class="submit-btn">
+            Valider la création
+        </button>
+    </div>
+
+</form>
+
+<!-- Lien vers le fichier JavaScript externe -->
+<script src="/js/Creation.js"></script>
+</body>
+</html>

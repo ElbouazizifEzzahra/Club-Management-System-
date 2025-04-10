@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accusal</title>
+    <link rel="stylesheet" href="/css/Accueil.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+<div th:if="${param.successMessage}" class="alert alert-success">
+    <span>✅</span>
+    <span th:text="${param.successMessage[0]}"></span>
+</div>
+
+<header>
+    <div id="un">
+        <div class="user-menu">
+            <button class="user-button" onclick="toggleUserMenu()">
+                <div class="user-icon">
+                    <span th:text="${#strings.substring(user.prenom, 0, 1)}"></span>
+                </div>
+                <span th:text="${user.prenom} + ' ' + ${user.nom}"></span>
+                <i class="fas fa-chevron-down"></i>
+            </button>
+            <div id="userDropdown" class="dropdown-content">
+                <form th:action="@{/logout}" method="post">
+
+                    <button type="submit" class="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i> Déconnexion
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <ul>
+            <li><i class="fas fa-home"></i> Accueil</li>
+            <li><i class="fas fa-users"></i> Clubs</li>
+            <li><i class="fas fa-calendar-alt"></i> Événements</li>
+        </ul>
+    </div>
+</header>
+
+<!-- Contenu principal -->
+ <!-- Le reste du code reste inchangé -->
+<section class="intro">
+    <h2>Bienvenue sur ClubConnection !</h2>
+    <p>
+        Découvrez une communauté dynamique et passionnée où les étudiants se réunissent pour explorer, innover et partager leurs passions.
+        Que vous soyez intéressé par l'ingénierie biomédicale, l'informatique, les systèmes électriques ou les systèmes embarqués,
+        nos clubs offrent un espace unique pour développer vos compétences, collaborer sur des projets innovants et créer des liens durables.
+        Rejoignez-nous et faites partie de l'aventure !
+    </p>
+
+</section>
+<section>
+
+    <div class="club-card" onclick="toggleInfo(this)">
+        <img src="/pictures/télécharger.jpg" alt="Club d'Ingénierie Biomédicale">
+        <h3>Club d'Ingénierie Biomédicale</h3>
+        <p>Innovation au service de la santé. Rejoignez-nous pour explorer les technologies de pointe en santé.</p>
+        <div class="more-info">
+            <p>Ce club travaille sur des projets liés aux énergies renouvelables, aux réseaux électriques et à l'électronique de puissance.</p>
+        </div>
+    </div>
+    <div class="club-card" onclick="toggleInfo(this)">
+        <img src="/pictures/7%20Reasons%20For%20Joining%20Clubs%20in%20College.jpg" alt="Club d'Informatique">
+        <h3>Club d'Informatique</h3>
+        <p>Codez l'avenir. Participez à des hackathons, des ateliers pratiques et des projets innovants.</p>
+        <div class="more-info">
+            <p>Ce club organise des ateliers de programmation, des compétitions de codage et des projets en intelligence artificielle.</p>
+        </div>
+    </div>
+</section>
+<section>
+
+    <div class="club-card" onclick="toggleInfo(this)">
+        <img src="/pictures/télécharger.jpg" alt="Club de Systèmes Électriques">
+        <h3>Club de Chimie</h3>
+
+        <p>L'énergie de l'innovation. Explorez les technologies qui alimentent le monde.</p>
+        <div class="more-info">
+            <p>Ce club se concentre sur la conception de dispositifs médicaux innovants, l'analyse de données médicales et la recherche en biotechnologie.</p>
+        </div>
+    </div>
+    <div class="club-card" onclick="toggleInfo(this)">
+        <img src="/pictures/télécharger%20(2).jpg" alt="Club de Systèmes Embarqués">
+        <h3>Club de Systèmes Electique et systèmes Embarqués</h3>
+        <p>Des systèmes intelligents pour un monde connecté. Découvrez comment les systèmes embarqués transforment notre monde.</p>
+        <div class="more-info">
+            <p>Ce club travaille sur des projets liés aux énergies renouvelables, aux réseaux électriques et à l'électronique de puissance.</p>
+        </div>
+
+    </div>
+</section>
+
+
+<footer>
+    <p>© 2025 ClubConnection - Tous droits réservés</p>
+    <div style="margin-top: 1rem;">
+        <a href="#" style="color: white; margin: 0 10px;">Contact</a>
+    </div>
+</footer>
+
+<script th:inline="none">
+    // Gestion du menu utilisateur
+    let menuOpen = false;
+
+    function toggleUserMenu() {
+        const dropdown = document.getElementById("userDropdown");
+        const chevron = document.querySelector('.fa-chevron-down');
+
+        menuOpen = !menuOpen;
+        dropdown.style.opacity = menuOpen ? '1' : '0';
+        dropdown.style.transform = menuOpen ? 'translateY(0)' : 'translateY(-10px)';
+        chevron.style.transform = menuOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+
+        if(menuOpen) {
+            dropdown.style.display = 'block';
+            document.addEventListener('click', closeMenuOnClickOutside);
+        } else {
+            dropdown.style.display = 'none';
+            document.removeEventListener('click', closeMenuOnClickOutside);
+        }
+    }
+
+    function closeMenuOnClickOutside(e) {
+        const userMenu = document.querySelector('.user-menu');
+        if (!userMenu.contains(e.target)) {
+            toggleUserMenu();
+        }
+    }
+</script>
+</body>
+</html>

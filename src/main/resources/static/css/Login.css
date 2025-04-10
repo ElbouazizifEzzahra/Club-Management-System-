@@ -1,0 +1,165 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    background: #f0f2f5;
+    justify-content: center;
+    align-items: center;
+}
+
+#un {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    width: 90%;
+    max-width: 450px;
+    text-align: center;
+}
+
+h1 {
+    color: #1a1a1a;
+    margin-bottom: 0.8rem;
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+
+#un p {
+    color: #606060;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+}
+
+#deux , #trois {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    justify-content: center;
+}
+
+#deux ,#trois button {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    background: #f0f2f5;
+    color: #404040;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+#deux,#trois button a{
+    text-decoration: none;
+    color: #404040;
+    width: 100%;
+    padding-top: 0%;
+    margin-top: 0%;
+}
+#deux ,#trois button:hover {
+    background: #1f4d92;
+    color: #e0e0e0;
+}
+#deux ,#trois button a:hover {
+    background: #1f4d92;
+    color: #e0e0e0;
+}
+
+
+#un > button {
+    width: 100%;
+    padding: 1rem;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+}
+
+#un > button:hover {
+    background: #0056b3;
+}
+
+input {
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1.2rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
+}
+.input-container {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.input-title {
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    font-size: 12px;
+    color: #1E88E5;
+    background: white;
+    padding: 0 5px;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #1E88E5;
+    outline: none;
+}
+
+.input-container input:focus + .input-title {
+    color: #1565C0; /* Bleu plus foncé au focus */
+}
+
+
+
+a {
+    display: block;
+    margin-top: 1.5rem;
+    color: #007bff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #0056b3;
+}
+
+@media (max-width: 480px) {
+    #un {
+        padding: 1.5rem;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+}
