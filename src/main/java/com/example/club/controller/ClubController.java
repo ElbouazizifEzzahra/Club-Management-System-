@@ -8,17 +8,19 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.RequestMapping;
 import jakarta.validation.Valid;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
 @Controller
+@RequestMapping("/clubs")
 public class ClubController {
 
     @Autowired
@@ -51,5 +53,12 @@ public class ClubController {
         club.setMembers(members != null ? members : List.of());
         clubRepository.save(club);
         return "redirect:/?successMessage=Le club a ete cree avec succes !";
+    }
+
+    @GetMapping("/{clubId}")
+    public String showClubDetails(@PathVariable String clubId, Model model) {
+        // Ici, vous pouvez ajouter la logique pour charger les détails du club
+        model.addAttribute("clubId", clubId);
+        return "club-details"; // Ceci va correspondre à club-details.html
     }
 }

@@ -3,9 +3,217 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accusal</title>
+    <title>Accueil</title>
     <link rel="stylesheet" href="/css/Accueil.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .read-more-btn {
+            display: inline-block;
+            padding: 8px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        .read-more-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        /* Style pour la modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        
+        .modal-content {
+            position: relative;
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            width: 80%;
+            max-width: 800px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+        
+        .close-btn {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            font-size: 28px;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.3s;
+        }
+        
+        .close-btn:hover {
+            color: #333;
+        }
+        
+        .club-details {
+            margin-top: 20px;
+            padding: 20px;
+        }
+        
+        .club-details h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        
+        .club-details img {
+            max-width: 100%;
+            height: auto;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .club-details p {
+            line-height: 1.6;
+            color: #444;
+            margin-bottom: 15px;
+        }
+        
+        .activities-list {
+            margin: 20px 0;
+            padding-left: 20px;
+        }
+        
+        .activities-list li {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        
+        .club-details ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .club-details ul li {
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .club-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px 8px 0 0;
+            transition: transform 0.3s ease;
+        }
+
+        .club-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .modal-content {
+            position: relative;
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            width: 80%;
+            max-width: 800px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .club-details img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .registration-form {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .registration-form h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #34495e;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .register-btn {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .register-btn:hover {
+            background-color: #218838;
+        }
+
+        .club-info {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .info-item {
+            text-align: center;
+        }
+
+        .info-item i {
+            font-size: 24px;
+            color: #007bff;
+            margin-bottom: 8px;
+        }
+
+        .info-label {
+            font-size: 12px;
+            color: #6c757d;
+        }
+
+        .info-value {
+            font-size: 16px;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+    </style>
 </head>
 
 <body>
@@ -26,7 +234,7 @@
             </button>
             <div id="userDropdown" class="dropdown-content">
                 <form th:action="@{/logout}" method="post">
-
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                     <button type="submit" class="logout-btn">
                         <i class="fas fa-sign-out-alt"></i> Déconnexion
                     </button>
@@ -42,8 +250,16 @@
     </div>
 </header>
 
-<!-- Contenu principal -->
- <!-- Le reste du code reste inchangé -->
+<!-- Modal pour les détails du club -->
+<div id="clubModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <div id="clubDetails" class="club-details">
+            <!-- Le contenu sera injecté ici dynamiquement -->
+        </div>
+    </div>
+</div>
+
 <section class="intro">
     <h2>Bienvenue sur ClubConnection !</h2>
     <p>
@@ -52,49 +268,39 @@
         nos clubs offrent un espace unique pour développer vos compétences, collaborer sur des projets innovants et créer des liens durables.
         Rejoignez-nous et faites partie de l'aventure !
     </p>
-
 </section>
-<section>
 
-    <div class="club-card" onclick="toggleInfo(this)">
+<section>
+    <div class="club-card">
         <img src="/pictures/télécharger.jpg" alt="Club d'Ingénierie Biomédicale">
         <h3>Club d'Ingénierie Biomédicale</h3>
         <p>Innovation au service de la santé. Rejoignez-nous pour explorer les technologies de pointe en santé.</p>
-        <div class="more-info">
-            <p>Ce club travaille sur des projets liés aux énergies renouvelables, aux réseaux électriques et à l'électronique de puissance.</p>
-        </div>
+        <button onclick="showClubDetails('biomedical')" class="read-more-btn">Lire la suite →</button>
     </div>
-    <div class="club-card" onclick="toggleInfo(this)">
+
+    <div class="club-card">
         <img src="/pictures/7%20Reasons%20For%20Joining%20Clubs%20in%20College.jpg" alt="Club d'Informatique">
         <h3>Club d'Informatique</h3>
         <p>Codez l'avenir. Participez à des hackathons, des ateliers pratiques et des projets innovants.</p>
-        <div class="more-info">
-            <p>Ce club organise des ateliers de programmation, des compétitions de codage et des projets en intelligence artificielle.</p>
-        </div>
+        <button onclick="showClubDetails('informatique')" class="read-more-btn">Lire la suite →</button>
     </div>
 </section>
-<section>
 
-    <div class="club-card" onclick="toggleInfo(this)">
+<section>
+    <div class="club-card">
         <img src="/pictures/télécharger.jpg" alt="Club de Systèmes Électriques">
         <h3>Club de Chimie</h3>
-
         <p>L'énergie de l'innovation. Explorez les technologies qui alimentent le monde.</p>
-        <div class="more-info">
-            <p>Ce club se concentre sur la conception de dispositifs médicaux innovants, l'analyse de données médicales et la recherche en biotechnologie.</p>
-        </div>
+        <button onclick="showClubDetails('chimie')" class="read-more-btn">Lire la suite →</button>
     </div>
-    <div class="club-card" onclick="toggleInfo(this)">
+
+    <div class="club-card">
         <img src="/pictures/télécharger%20(2).jpg" alt="Club de Systèmes Embarqués">
         <h3>Club de Systèmes Electique et systèmes Embarqués</h3>
         <p>Des systèmes intelligents pour un monde connecté. Découvrez comment les systèmes embarqués transforment notre monde.</p>
-        <div class="more-info">
-            <p>Ce club travaille sur des projets liés aux énergies renouvelables, aux réseaux électriques et à l'électronique de puissance.</p>
-        </div>
-
+        <button onclick="showClubDetails('systemes')" class="read-more-btn">Lire la suite →</button>
     </div>
 </section>
-
 
 <footer>
     <p>© 2025 ClubConnection - Tous droits réservés</p>
@@ -127,10 +333,119 @@
 
     function closeMenuOnClickOutside(e) {
         const userMenu = document.querySelector('.user-menu');
+        const logoutButton = e.target.closest('.logout-btn');
+        
+        if (logoutButton) {
+            return;
+        }
+        
         if (!userMenu.contains(e.target)) {
             toggleUserMenu();
         }
     }
+
+    // Gestion des détails des clubs
+    async function showClubDetails(clubId) {
+        try {
+            const response = await fetch('/js/clubs-data.json');
+            if (!response.ok) {
+                throw new Error('Erreur lors du chargement des données');
+            }
+            const data = await response.json();
+            const club = data[clubId];
+            
+            if (club) {
+                const detailsHtml = `
+                    <h2>${club.title}</h2>
+                    <img src="${club.image}" alt="${club.title}">
+                    <div class="club-info">
+                        <div class="info-item">
+                            <i class="fas fa-users"></i>
+                            <div class="info-label">Places disponibles</div>
+                            <div class="info-value">${club.places}</div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-clock"></i>
+                            <div class="info-label">Horaires</div>
+                            <div class="info-value">${club.schedule}</div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-list-ul"></i>
+                            <div class="info-label">Activités</div>
+                            <div class="info-value">${club.activities.length}</div>
+                        </div>
+                    </div>
+                    <div class="club-description">${club.fullDescription}</div>
+                    <h3>Activités principales :</h3>
+                    <ul class="activities-list">
+                        ${club.activities.map(activity => `<li>${activity}</li>`).join('')}
+                    </ul>
+                    <div class="registration-form">
+                        <h3>S'inscrire au club</h3>
+                        <form onsubmit="handleRegistration(event, '${clubId}')">
+                            <div class="form-group">
+                                <label for="motivation">Votre motivation :</label>
+                                <input type="text" id="motivation" name="motivation" required 
+                                       placeholder="Pourquoi souhaitez-vous rejoindre ce club ?">
+                            </div>
+                            <div class="form-group">
+                                <label for="experience">Expérience dans le domaine :</label>
+                                <input type="text" id="experience" name="experience" required 
+                                       placeholder="Avez-vous déjà une expérience dans ce domaine ?">
+                            </div>
+                            <button type="submit" class="register-btn">
+                                <i class="fas fa-user-plus"></i> S'inscrire au club
+                            </button>
+                        </form>
+                    </div>
+                `;
+                
+                document.getElementById('clubDetails').innerHTML = detailsHtml;
+                document.getElementById('clubModal').style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+        } catch (error) {
+            console.error('Erreur lors du chargement des détails du club:', error);
+            alert('Erreur lors du chargement des détails du club. Veuillez réessayer.');
+        }
+    }
+
+    function handleRegistration(event, clubId) {
+        event.preventDefault();
+        const motivation = document.getElementById('motivation').value;
+        const experience = document.getElementById('experience').value;
+        
+        // Ici vous pouvez ajouter la logique pour envoyer les données au serveur
+        console.log('Inscription au club:', {
+            clubId,
+            motivation,
+            experience
+        });
+        
+        alert('Votre demande d\'inscription a été enregistrée. Nous vous contacterons bientôt !');
+        closeModal();
+    }
+
+    function closeModal() {
+        document.getElementById('clubModal').style.display = 'none';
+        // Réactiver le défilement du body
+        document.body.style.overflow = 'auto';
+    }
+
+    // Fermer la modal si on clique en dehors
+    window.onclick = function(event) {
+        const modal = document.getElementById('clubModal');
+        if (event.target == modal) {
+            closeModal();
+        }
+    }
+
+    // Gérer la touche Echap pour fermer la modal
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            closeModal();
+        }
+    });
 </script>
 </body>
 </html>

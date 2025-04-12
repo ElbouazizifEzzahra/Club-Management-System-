@@ -88,6 +88,28 @@ h1 {
     background: #0056b3;
 }
 
+#last_button {
+    width: 100%;
+   
+    background: #1f4d92;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+}
+
+#last_button:hover {
+    background: #1a4178;
+}
+
+#last_button:active {
+    background: #153561;
+}
+
 input {
     width: 100%;
     padding: 1rem;

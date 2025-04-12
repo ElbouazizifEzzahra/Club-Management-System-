@@ -4,17 +4,12 @@ import com.example.club.model.User;
 import com.example.club.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 //import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-
-//import javax.security.sasl.AuthenticationException;
-//import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 @Controller
@@ -60,10 +55,7 @@ public class UserController {
     public String showLoginForm() {
         return "Login";
     }
-    @GetMapping("/logout")
-    public String displayLoginForm() {
-        return "redirect:/Login";
-    }
+  
 
    /* @PostMapping("/login")
     public String processLogin(

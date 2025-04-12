@@ -1,0 +1,38 @@
+{
+    "biomedical": {
+        "title": "Club d'Ingénierie Biomédicale",
+        "description": "Innovation au service de la santé",
+        "fullDescription": "Le Club d'Ingénierie Biomédicale est dédié à l'exploration des technologies médicales innovantes. Nos membres travaillent sur des projets passionnants tels que :<ul><li>Développement de prothèses intelligentes</li><li>Analyse de données médicales</li><li>Imagerie médicale avancée</li></ul>",
+        "image": "/pictures/télécharger.jpg",
+        "activities": ["Projets de recherche", "Conférences", "Ateliers pratiques"],
+        "places": 20,
+        "schedule": "Mardi et Jeudi, 14h-16h"
+    },
+    "informatique": {
+        "title": "Club d'Informatique",
+        "description": "Codez l'avenir",
+        "fullDescription": "Le Club d'Informatique est un espace d'innovation où les passionnés de programmation se réunissent. Nos activités incluent :<ul><li>Hackathons</li><li>Projets open-source</li><li>Formation en IA et Machine Learning</li></ul>",
+        "image": "/pictures/7 Reasons For Joining Clubs in College.jpg",
+        "activities": ["Programmation", "Intelligence Artificielle", "Développement Web"],
+        "places": 25,
+        "schedule": "Lundi et Mercredi, 15h-17h"
+    },
+    "chimie": {
+        "title": "Club de Chimie",
+        "description": "L'énergie de l'innovation",
+        "fullDescription": "Le Club de Chimie explore les frontières de la science moléculaire. Nos membres participent à :<ul><li>Expériences en laboratoire</li><li>Recherche en chimie verte</li><li>Projets environnementaux</li></ul>",
+        "image": "/pictures/télécharger.jpg",
+        "activities": ["Expériences", "Recherche", "Projets écologiques"],
+        "places": 15,
+        "schedule": "Mercredi et Vendredi, 13h-15h"
+    },
+    "systemes": {
+        "title": "Club de Systèmes Électriques et Embarqués",
+        "description": "Des systèmes intelligents pour un monde connecté",
+        "fullDescription": "Le Club de Systèmes Électriques et Embarqués se concentre sur l'IoT et les systèmes intelligents. Nos projets incluent :<ul><li>Conception de circuits</li><li>Programmation de microcontrôleurs</li><li>Projets domotiques</li></ul>",
+        "image": "/pictures/télécharger (2).jpg",
+        "activities": ["Électronique", "IoT", "Systèmes embarqués"],
+        "places": 18,
+        "schedule": "Mardi et Jeudi, 16h-18h"
+    }
+} 
